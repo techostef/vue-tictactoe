@@ -42,19 +42,23 @@
         <div class="input-prepend input-append m-auto">
             <span class="add-on win_text w-full" style="width: 216px; border-radius: 0">Turn {{turn.toUpperCase()}}</span>
         </div>
-        <div class="m-auto flex flex-wrap items-baseline w-full">
-            <div class="w-full flex flex-wrap items-baseline" v-for="(item, n1) in arrScale" :key="n1">
-                <div class="flex btn span1 ml-2 py-2 px-0 border-0 mb-4" v-for="(item1, n2) in item" :key="n1 + n2"
-                     :style="'width: calc(' + sizeItem + '% - 0.5rem);font-size: '+ sizeItem +'px;min-height: 30px'"
-                     @click="setTurn(item1)"
-                     v-bind:class="{'btn-primary' : item1.Own === 'o', 'btn-info' : item1.Own === 'x', 'disable' : item1.Own}"
-                >
-                    <div class="m-auto">
-                        {{(item1.Own ? item1.Own : '+')}}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="w-full">
+			<div class="m-auto flex flex-wrap items-baseline" :style="'width: ' + (valueInput * 70) + 'px'">
+				<div class="w-full flex flex-wrap items-baseline" v-for="(item, n1) in arrScale" :key="n1">
+					<div class="w-full">
+						<div class="flex btn span1 ml-2 py-2 px-0 border-0 mb-4" v-for="(item1, n2) in item" :key="n1 + n2"
+							 :style="'min-height: 30px'"
+							 @click="setTurn(item1)"
+							 v-bind:class="{'btn-primary' : item1.Own === 'o', 'btn-info' : item1.Own === 'x', 'disable' : item1.Own}"
+						>
+							<div class="m-auto">
+								{{(item1.Own ? item1.Own : '+')}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
     <div class="m-auto" style="width: 220px" v-if="winnerX > 0 || winnerO > 0">
         <div class="span3 new_span ml-0">
@@ -70,13 +74,13 @@
         el: '#app',
         data: {
             message: 'Hello Vue!',
+			valueInput: 3,
             scale: 3,
             winnerX: 0,
             winnerO: 0,
             arrScale: [],
             sizeItem: 0,
-            turn: 'x',
-            fontSize: '40'
+            turn: 'x'
         },
         computed: {
 
@@ -95,6 +99,7 @@
                     alert('Minimun value is 3')
                     return false
                 }
+				this.valueInput = this.scale
                 this.arrScale = []
                 for(var i = 0;i < (this.scale); i++) {
                     this.arrScale[i] = []
