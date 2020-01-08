@@ -45,7 +45,7 @@
         <div class="m-auto flex flex-wrap items-baseline w-full">
             <div class="w-full flex flex-wrap items-baseline" v-for="(item, n1) in arrScale" :key="n1">
                 <div class="flex btn span1 ml-2 py-2 px-0 border-0 mb-4" v-for="(item1, n2) in item" :key="n1 + n2"
-                     :style="'width: calc(' + sizeItem + '% - 0.5rem);font-size: '+ sizeItem +'px,min-height: 30px'"
+                     :style="'width: calc(' + sizeItem + '% - 0.5rem);font-size: '+ sizeItem +'px;min-height: 30px'"
                      @click="setTurn(item1)"
                      v-bind:class="{'btn-primary' : item1.Own === 'o', 'btn-info' : item1.Own === 'x', 'disable' : item1.Own}"
                 >
